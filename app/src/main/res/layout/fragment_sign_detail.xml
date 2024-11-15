@@ -1,0 +1,40 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/imgSign"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/sign_image" />
+
+        <TextView
+            android:id="@+id/signNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sign Details" />
+
+        <TextView
+            android:id="@+id/tvSignDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sign Description"
+            android:layout_marginTop="16dp"/>
+
+        <Button
+            android:id="@+id/btnSendEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Send Email"
+            android:layout_marginTop="16dp"/>
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/signListFragment">
+
+    <!-- Fragmento SignListFragment -->
+    <fragment
+        android:id="@+id/signListFragment"
+        android:name="com.example.certificacion.ui.fragment.SignListFragment"
+        android:label="fragment_sign_list"
+        tools:layout="@layout/fragment_sign_list">
+        <!-- Acción para ir a SignDetailFragment -->
+        <action
+            android:id="@+id/action_signListFragment_to_signDetailFragment"
+            app:destination="@id/signDetailFragment" />
+        <!-- Acción para ir a ZodiacListFragment -->
+        <action
+            android:id="@+id/action_signListFragment_to_zodiacListFragment"
+            app:destination="@id/zodiacListFragment" />
+    </fragment>
+
+    <!-- Fragmento SignDetailFragment -->
+    <fragment
+        android:id="@+id/signDetailFragment"
+        android:name="com.example.certificacion.ui.fragment.SignDetailFragment"
+        android:label="fragment_sign_detail"
+        tools:layout="@layout/fragment_sign_detail" />
+
+    <!-- Fragmento ZodiacListFragment -->
+    <fragment
+        android:id="@+id/zodiacListFragment"
+        android:name="com.example.certificacion.ui.fragment.ZodiacListFragment"
+        android:label="fragment_zodiac_list"
+        tools:layout="@layout/fragment_zodiac_list" />
+</navigation>

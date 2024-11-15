@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Certificación</string>
+
+    <!-- Pantalla de lista -->
+    <string name="sign_list_title">Lista de Signos Zodiacales</string>
+    <string name="no_signs_found">No se encontraron signos</string>
+
+    <!-- Pantalla de detalle -->
+    <string name="sign_detail_title">Detalle del Signo</string>
+    <string name="send_email">Enviar Correo</string>
+    <string name="sign_description">Descripción:</string>
+    <string name="sign_image">Texto o recurso para la imagen del signo</string>
+    <string name="action_settings">Ajustes</string>
+
+    <!-- Correo -->
+    <string name="email_subject">Información sobre mi Horóscopo - %1$s</string>
+    <string name="email_body">Solicito más información sobre mi signo %1$s, además, quiero suscribirme al horóscopo diario y las últimas noticias.</string>
+
+</resources>
