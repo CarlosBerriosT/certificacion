@@ -4,30 +4,42 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.example.certificacion.R
+import com.example.certificacion.databinding.FragmentSignDetailBinding
+import com.example.certificacion.model.Sign
+import com.example.certificacion.ui.viewmodel.SignDetailViewModel
 
-class SignDetailFragment : Fragment() {
+class SignDetailFragment : Fragment(R.layout.fragment_sign_detail) {
+
+    private lateinit var binding: FragmentSignDetailBinding
+    private var signId: Int = 0
+    private val signDetailViewModel: SignDetailViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflar el diseño del fragmento
-        return inflater.inflate(R.layout.fragment_sign_detail, container, false)
+        binding = FragmentSignDetailBinding.inflate(inflater, container, false)
+
+        // Recupera el id del signo pasado a través del Bundle
+        arguments?.let {
+            signId = it.getInt("signId")
+        }
+
+        // Aquí deberías buscar el signo con el id obtenido
+        val sign = getSignById(signId) // Simulación de obtención de signo
+
+        // Muestra la información del signo
+        binding.tvSignName.text = sign.name
+        binding.tvSignDescription.text = sign.dates
+
+        return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        // Accede al argumento directamente usando el Bundle
-        val signName = arguments?.getString("signName")
-
-        // Usa el argumento en tu lógica
-        signName?.let {
-            // Muestra el nombre del signo en un TextView
-            view.findViewById<TextView>(R.id.signNameTextView).text = it
-        }
+    private fun getSignById(id: Int): Sign {
+        // Este es un ejemplo simulado; debes obtener el signo desde tu base de datos o ViewModel
+        return Sign(id, "Aries", "March 21 - April 19", "Fire", "Mars", "Ram", "Red", "aries_logo_url")
     }
 }

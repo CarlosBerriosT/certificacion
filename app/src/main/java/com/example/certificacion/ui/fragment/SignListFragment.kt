@@ -1,45 +1,51 @@
 package com.example.certificacion.ui.fragment
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.certificacion.R
-import com.example.certificacion.data.SignRepository
-import com.example.certificacion.ui.adapter.SignAdapter
-import com.example.certificacion.ui.view.SignViewModelFactory
-import com.example.certificacion.ui.viewmodel.SignListViewModel
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.certificacion.R
+import com.example.certificacion.databinding.FragmentSignListBinding
+import com.example.certificacion.ui.viewmodel.SignViewModel
+import com.example.certificacion.ui.adapter.SignAdapter
 
 class SignListFragment : Fragment(R.layout.fragment_sign_list) {
 
-    private lateinit var viewModel: SignListViewModel
-    private lateinit var adapter: SignAdapter
+    private lateinit var binding: FragmentSignListBinding
+    private val signViewModel: SignViewModel by viewModels()
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentSignListBinding.inflate(inflater, container, false)
 
-        // Configuración del ViewModel
-        val signRepository = SignRepository(requireContext())
-        val factory = SignViewModelFactory(signRepository)
-        viewModel = ViewModelProvider(this, factory).get(SignListViewModel::class.java)
-
-        // Configuración del RecyclerView
-        val recyclerView = view.findViewById<RecyclerView>(R.id.rvSigns)
-        recyclerView.layoutManager = LinearLayoutManager(context)
-        adapter = SignAdapter { sign ->
-            // Acción para navegar al detalle del signo
-            findNavController().navigate(SignListFragment.actionSignListFragmentToSignDetail¿(sign.id))
+        val signAdapter = SignAdapter { sign ->
+            // Crea un Bundle para pasar el 'id' del signo
+            val bundle = Bundle().apply {
+                putInt("signId", sign.id)  // Pasa el ID del signo
+            }
+            // Navega al SignDetailFragment con el Bundle
+            findNavController().navigate(R.id.action_signListFragment_to_signDetailFragment, bundle)
         }
-        recyclerView.adapter = adapter
 
-        // Observando los datos de signos
-        viewModel.getSigns().observe(viewLifecycleOwner, Observer { signs ->
-            adapter.submitList(signs)
-        })
+        // Aquí es donde se hace referencia al RecyclerView con el ID correcto
+        binding.rvSigns.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = signAdapter
+        }
+
+        signViewModel.signs.observe(viewLifecycleOwner) { signs ->
+            signs?.let {
+                signAdapter.submitList(it)
+            }
+        }
+
+
+        return binding.root
     }
 }

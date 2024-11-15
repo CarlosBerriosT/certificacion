@@ -1,5 +1,4 @@
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp">
@@ -18,10 +17,13 @@
             android:contentDescription="@string/sign_image" />
 
         <TextView
-            android:id="@+id/signNameTextView"
+            android:id="@+id/tvSignName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sign Details" />
+            android:text="Sign Name"
+            android:layout_marginTop="16dp"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/tvSignDescription"

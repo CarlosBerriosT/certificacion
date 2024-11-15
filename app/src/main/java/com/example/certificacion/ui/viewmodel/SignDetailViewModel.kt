@@ -5,18 +5,17 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.certificacion.data.SignRepository
+import com.example.certificacion.model.Sign
 import com.example.certificacion.model.SignDetail
 import kotlinx.coroutines.launch
 
-class SignDetailViewModel(private val signRepository: SignRepository) : ViewModel() {
-
+class SignDetailViewModel : ViewModel() {
+    // Supongamos que esperas un SignDetail en lugar de un Sign
     private val _signDetail = MutableLiveData<SignDetail>()
     val signDetail: LiveData<SignDetail> = _signDetail
 
-    fun getSignDetail(id: Int) {
-        viewModelScope.launch {
-            val response = signRepository.getSignById(id)
-            _signDetail.postValue(response)
-        }
+    fun setSignDetail(sign: Sign) {
+        val signDetail = SignDetail(sign.name, sign.symbol) // Mapea el objeto Sign a SignDetail
+        _signDetail.value = signDetail
     }
 }
