@@ -63,9 +63,15 @@ dependencies {
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.play.services.analytics.impl)
+    implementation(libs.androidx.navigation.fragment)
+    implementation(libs.androidx.junit.ktx)
+    implementation(libs.androidx.espresso.contrib)
+    implementation(libs.androidx.runtime.android)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    testImplementation("com.squareup.okhttp3:mockwebserver:4.9.3")
+
 
     //Retrofit
     implementation ("com.squareup.retrofit2:retrofit:2.11.0")
