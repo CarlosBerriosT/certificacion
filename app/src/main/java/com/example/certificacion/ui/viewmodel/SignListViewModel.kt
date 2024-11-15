@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.certificacion.data.SignRepository
 import com.example.certificacion.model.Sign
 import kotlinx.coroutines.launch
+import com.example.certificacion.ui.viewmodel.SignListViewModel
 
 class SignListViewModel(private val signRepository: SignRepository) : ViewModel() {
 
@@ -20,3 +21,8 @@ class SignListViewModel(private val signRepository: SignRepository) : ViewModel(
         }
     }
 }
+
+private fun <T> MutableLiveData<T>.postValue(response: LiveData<T>) {
+
+}
+

@@ -10,12 +10,25 @@ import com.example.certificacion.model.SignDetail
 import kotlinx.coroutines.launch
 
 class SignDetailViewModel : ViewModel() {
-    // Supongamos que esperas un SignDetail en lugar de un Sign
     private val _signDetail = MutableLiveData<SignDetail>()
     val signDetail: LiveData<SignDetail> = _signDetail
 
     fun setSignDetail(sign: Sign) {
-        val signDetail = SignDetail(sign.name, sign.symbol) // Mapea el objeto Sign a SignDetail
+        // Supón que tienes información adicional en tu clase SignDetail
+        val signDetail = SignDetail(
+            id = sign.id,
+            name = sign.name,
+            dates = sign.dates,
+            element = sign.element,
+            planetRegent = sign.planetRegent,
+            symbol = sign.symbol,
+            color = sign.color,
+            strengths = listOf(), // Aquí puedes pasar información adicional si la tienes
+            weaknesses = listOf(),
+            description = "", // Lo mismo aquí
+            compatibility = listOf(),
+            image = sign.logo // Suponiendo que el logo es una URL de imagen
+        )
         _signDetail.value = signDetail
     }
 }

@@ -9,14 +9,22 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.certificacion.R
+import com.example.certificacion.data.SignRepository
 import com.example.certificacion.databinding.FragmentSignListBinding
 import com.example.certificacion.ui.viewmodel.SignViewModel
 import com.example.certificacion.ui.adapter.SignAdapter
+import com.example.certificacion.ui.view.SignListViewModelFactory
+import com.example.certificacion.ui.viewmodel.SignListViewModel
 
 class SignListFragment : Fragment(R.layout.fragment_sign_list) {
 
     private lateinit var binding: FragmentSignListBinding
-    private val signViewModel: SignViewModel by viewModels()
+    private val signRepository: SignRepository by lazy {
+        SignRepository(requireContext())
+    }
+    private val signViewModel: SignListViewModel by viewModels {
+        SignListViewModelFactory(signRepository)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,15 +33,12 @@ class SignListFragment : Fragment(R.layout.fragment_sign_list) {
         binding = FragmentSignListBinding.inflate(inflater, container, false)
 
         val signAdapter = SignAdapter { sign ->
-            // Crea un Bundle para pasar el 'id' del signo
             val bundle = Bundle().apply {
-                putInt("signId", sign.id)  // Pasa el ID del signo
+                putInt("signId", sign.id)
             }
-            // Navega al SignDetailFragment con el Bundle
             findNavController().navigate(R.id.action_signListFragment_to_signDetailFragment, bundle)
         }
 
-        // Aquí es donde se hace referencia al RecyclerView con el ID correcto
         binding.rvSigns.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = signAdapter
@@ -44,7 +49,6 @@ class SignListFragment : Fragment(R.layout.fragment_sign_list) {
                 signAdapter.submitList(it)
             }
         }
-
 
         return binding.root
     }
